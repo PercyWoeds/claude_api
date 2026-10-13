@@ -123,14 +123,16 @@ const I = {
 /* ------------------------------------------------------------------ */
 /* SIDEBAR                                                             */
 /* ------------------------------------------------------------------ */
-
 function Sidebar() {
   const [active, setActive] = useState("Facturación");
 
   return (
-    <aside className="w-64 shrink-0 bg-sidebar border-r border-line min-h-screen flex flex-col">
-      {/* Header */}
-      <div className="px-3 pt-3 pb-3">
+    <aside
+      className="fixed left-0 top-0 bottom-0 w-64 bg-sidebar border-r border-line flex flex-col"
+      style={{ zIndex: 30 }}
+    >
+      {/* Header: logo + toggle */}
+      <div className="px-3 pt-3 pb-3 shrink-0">
         <div className="flex items-center justify-between">
           <a className="pl-2 flex items-center" href="#">
             <span className="font-serif text-[16px] leading-none text-ink">
@@ -147,7 +149,7 @@ function Sidebar() {
       </div>
 
       {/* Volver a la aplicación */}
-      <div className="px-3 h-11 pt-1 pb-2">
+      <div className="px-3 h-11 pt-1 pb-2 shrink-0">
         <a
           href="#"
           className="flex h-8 items-center gap-3 rounded px-2 text-[14px] text-ink/70 hover:text-ink hover:bg-hoverbg"
@@ -158,7 +160,7 @@ function Sidebar() {
       </div>
 
       {/* Buscador */}
-      <div className="px-3 pb-2">
+      <div className="px-3 pb-2 shrink-0">
         <button className="flex h-8 w-full items-center gap-2 rounded bg-white border border-line px-2 text-[14px] text-muted hover:border-ink/30">
           <span className="shrink-0">{I.search}</span>
           <span className="flex-1 text-left truncate">Buscar en Console…</span>
@@ -169,8 +171,8 @@ function Sidebar() {
         </button>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 pb-2">
+      {/* Nav — esta parte SÍ hace scroll interno si es necesario */}
+      <nav className="flex-1 overflow-y-auto px-3 pb-2 min-h-0">
         <ul className="flex flex-col gap-1">
           <li>
             <a
@@ -213,8 +215,18 @@ function Sidebar() {
         </ul>
       </nav>
 
-      {/* Links inferiores + usuario */}
-      <div className="flex flex-col gap-1 pt-2 px-3 border-t border-line">
+      {/* Bloque rojo de saldo — fijo abajo del nav */}
+      <div className="px-3 pb-3 shrink-0">
+        <div className="border border-redborder bg-redbg rounded-md px-3 py-2.5 flex gap-2">
+          <span className="shrink-0 mt-[2px] text-redink">{I.warn}</span>
+          <p className="text-[12px] leading-[1.35] text-redink">
+            Tu saldo es $0.00. Agrega fondos para desarrollar con Console.
+          </p>
+        </div>
+      </div>
+
+      {/* Links inferiores + usuario — pegados al fondo */}
+      <div className="flex flex-col gap-1 pt-2 px-3 pb-3 border-t border-line shrink-0">
         <a
           href="#"
           className="flex h-9 items-center gap-3 rounded px-2 text-[14px] text-ink/70 hover:bg-hoverbg"
@@ -233,23 +245,23 @@ function Sidebar() {
 
         <div className="flex h-9 items-center gap-3 rounded px-2 text-[14px] text-ink/70">
           <span className="shrink-0">{I.clock}</span>
-          <span className="truncate flex-1">Créditos</span>
-          <span className="text-[14px] tabular-nums">USD 0.00</span>
+          <span className="text-[12px] text-muted">USD 0.00</span>
+          <a href="#" className="ml-auto text-[13px] text-blue-600 hover:underline">
+            Agregar fondos
+          </a>
         </div>
 
         {/* Usuario */}
-        <div className="flex h-11 flex-col justify-center pb-3">
-          <button className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-start hover:bg-hoverbg">
-            <div className="w-8 h-8 rounded bg-white border border-line flex items-center justify-center shrink-0 text-ink/70">
-              {I.user}
-            </div>
-            <div className="flex min-w-0 flex-1 flex-col text-[12px] text-muted">
-              <span className="truncate text-[14px] text-ink">Percy</span>
-              <span className="truncate">Percy's Individual Org</span>
-            </div>
-            <span className="shrink-0 text-muted">{I.chev}</span>
-          </button>
-        </div>
+        <button className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-start hover:bg-hoverbg mt-1">
+          <div className="w-8 h-8 rounded bg-white border border-line flex items-center justify-center shrink-0 text-ink/70">
+            {I.user}
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col text-[12px] text-muted">
+            <span className="truncate text-[14px] text-ink">Percy</span>
+            <span className="truncate">Percy's Individual Org</span>
+          </div>
+          <span className="shrink-0 text-muted">{I.chev}</span>
+        </button>
       </div>
     </aside>
   );
@@ -521,29 +533,27 @@ function InvoiceHistory() {
 /* ------------------------------------------------------------------ */
 /* PÁGINA                                                              */
 /* ------------------------------------------------------------------ */
-
 export default function Page() {
   return (
-    <div className="flex w-full min-h-screen bg-bg text-ink">
+    <div className="min-h-screen bg-white text-ink">
+      {/* Sidebar fijo a la izquierda */}
       <Sidebar />
-      <div className="flex grow min-w-0">
-        <div className="flex flex-col grow min-w-0">
-          <div className="mx-auto w-full max-w-[1200px] px-4 py-8 md:px-8 md:py-6 flex grow flex-col">
-            <div className="max-w-4xl mx-auto w-full">
-              <h1 className="text-ink text-[24px] font-medium mb-2">Facturación</h1>
 
-              <AlertBanner />
+      {/* Contenido a la derecha — hace scroll, con margen izquierdo = ancho del sidebar */}
+      <main className="ml-64 min-h-screen bg-white">
+        <div className="mx-auto w-full max-w-[860px] px-12 py-10">
+          <h1 className="text-ink text-[24px] font-medium mb-2">Facturación</h1>
 
-              <div className="flex flex-col divide-y divide-line">
-                <CreditBalance />
-                <PaymentDetails />
-                <SpendingLimits />
-                <InvoiceHistory />
-              </div>
-            </div>
+          <AlertBanner />
+
+          <div className="flex flex-col divide-y divide-line">
+            <CreditBalance />
+            <PaymentDetails />
+            <SpendingLimits />
+            <InvoiceHistory />
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
