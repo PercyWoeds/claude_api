@@ -1,30 +1,29 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-  bg: "#fafaf7",
-  panel: "#ffffff",
-  sidebar: "#f7f7f4",
-  ink: "#1f1f1f",
-  muted: "#6b7280",
-  line: "#e5e5e2",
-  hoverbg: "#ececea",
-  redbg: "#fdecea",
-  redborder: "#f5c6c2",
-  redink: "#8a2c24",
-  bluebadge: "#dbeafe",
-  blueink: "#1e40af",
-},
+        bg: "#faf9f5",
+        panel: "#ffffff",
+        sidebar: "#f7f7f4",
+        ink: "#141413",
+        muted: "#6b6b6b",
+        line: "#e8e6dc",
+        hoverbg: "#ebe9df",
+        redbg: "#fdecea",
+        redborder: "#f5c6c2",
+        redink: "#8a2c24",
+        bluebadge: "#dbeafe",
+        blueink: "#1e40af",
+      },
       fontFamily: {
-        sans: ["ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
-        serif: ["ui-serif", "Georgia", "Cambria", "serif"],
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["ui-serif", "Georgia", "Cambria", "Times New Roman", "serif"],
       },
     },
   },
   plugins: [],
 };
 export default config;
-
