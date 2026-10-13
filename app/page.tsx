@@ -29,12 +29,12 @@ type Invoice = {
 };
 
 const INVOICES: Invoice[] = [
-  { date: "21 ago 2026", type: "Concesión de crédito", number: "XTXYVVMP-0004", status: "Vence el 22 ago 2027", cost: "USD 5.90", action: true },
-  { date: "21 ago 2026", type: "Concesión de crédito", number: "XTXYVVMP-0003", status: "Vence el 22 ago 2027", cost: "USD 5.90", action: true },
+  { date: "21 ago 2026", type: "Concesión de crédito", number: "XTXYVVMP-0004", status: "Vence el 22 ago 2027", cost: "USD 50.90", action: true },
+  { date: "21 ago 2026", type: "Concesión de crédito", number: "XTXYVVMP-0003", status: "Vence el 22 ago 2027", cost: "USD 50.90", action: true },
   { date: "1 jul 2026",  type: "Créditos gratuitos",   number: "-",             status: "Vence el 2 jul 2027",  cost: "USD 0.05", action: false },
-  { date: "5 jun 2026",  type: "Concesión de crédito", number: "XTXYVVMP-0002", status: "Vence el 6 jun 2027",  cost: "USD 5.90", action: true },
+  { date: "5 jun 2026",  type: "Concesión de crédito", number: "XTXYVVMP-0002", status: "Vence el 6 jun 2027",  cost: "USD 50.90", action: true },
   { date: "1 may 2026",  type: "Créditos gratuitos",   number: "-",             status: "Vence el 1 jun 2027",  cost: "USD 0.43", action: false },
-  { date: "19 abr 2026", type: "Concesión de crédito", number: "XTXYVVMP-0001", status: "Vence el 20 abr 2027", cost: "USD 5.00", action: true },
+  { date: "19 abr 2026", type: "Concesión de crédito", number: "XTXYVVMP-0001", status: "Vence el 20 abr 2027", cost: "USD 50.00", action: true },
 ];
 
 /* ------------------------------------------------------------------ */
